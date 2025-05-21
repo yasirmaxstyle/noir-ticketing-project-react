@@ -8,12 +8,12 @@ export default function MovieCards({ category, title, genres, release, src, id }
           <div className="hidden bg-black opacity-50 absolute w-full h-full z-[1] group-hover:block" />
           <div className="hidden absolute inset-0 translate-y-1/3 group-hover:grid justify-center z-[2]">
             <div className="flex flex-col gap-3">
-              <Link to={`/movie/${id}`} state={id} className="border border-white px-5 py-3 rounded">
+              <Link to={`/movie/${id}`} state={id} className="border border-white px-5 py-3 rounded text-center">
                 <span className="text-white">
                   VIEW DETAILS
                 </span>
               </Link>
-              <Link className="bg-black px-5 py-3 rounded">
+              <Link className="bg-black px-5 py-3 rounded text-center">
                 <span className="text-white">
                   BUY TICKET
                 </span>
