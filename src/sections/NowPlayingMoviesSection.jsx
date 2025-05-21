@@ -21,7 +21,7 @@ function NowPlayingMoviesSection() {
         <div className="flex gap-3 overflow-scroll">
           {movie.map(movie =>
             <>
-              <MovieCards title={movie.title} genres={movie.genre} src={movie.img} id={movie.id} key={movie.id} />
+              <MovieCards category="now-playing" title={movie.title} genres={movie.genre} src={movie.img} id={movie.id} />
             </>
           )}
         </div>
