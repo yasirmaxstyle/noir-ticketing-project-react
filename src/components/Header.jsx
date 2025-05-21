@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import logo from '../assets/tickitz-logo.svg'
+import logo from '../assets/noir-logo.svg'
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 
 export default function Header({ className }) {
@@ -8,7 +8,7 @@ export default function Header({ className }) {
       <nav className={`flex fixed z-10 w-screen justify-center ${className}`}>
         <div className='flex max-w-[1080px] items-center justify-between w-full'>
           <a href="">
-            <img src={logo} alt="logo-tickitz" />
+            <img src={logo} alt="logo-tickitz" className='w-20' />
           </a>
           <div className='flex gap-3'>
             <Link to={'/'}>

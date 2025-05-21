@@ -1,4 +1,4 @@
-import logo from '../assets/tickitz-logo.svg'
+import logo from '../assets/noir-logo.svg'
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -13,7 +13,7 @@ function Footer() {
       <div className='bg-graphite flex flex-col items-center justify-center py-6 gap-6'>
         <div className='grid grid-cols-4 max-w-[1080px] gap-6'>
           <div className='text-white'>
-            <img src={logo} alt="logo tickitz" />
+            <img src={logo} alt="logo tickitz" className='w-50' />
             <p>Stop waiting in line. Buy tickets conveniently, watch movies quietly.</p>
           </div>
           <div className='text-white grid gap-2'>
@@ -35,23 +35,23 @@ function Footer() {
             <h4 className='font-bold'>FOLLOW US</h4 >
             <a href="" className='flex items-center gap-3'>
               <FaFacebook />
-              <span>tickitz.cinema.id</span>
+              <span>noir.cinema.id</span>
             </a>
             <a href="" className='flex items-center gap-3'>
               <FaInstagram />
-              <span>tickitz.cinema.id</span>
+              <span>noir.cinema.id</span>
             </a>
             <a href="" className='flex items-center gap-3'>
               <FaXTwitter />
-              <span>tickitz.cinema.id</span>
+              <span>noir.cinema.id</span>
             </a>
             <a href="" className='flex items-center gap-3'>
               <FaYoutube />
-              <span>tickitz.cinema.id</span>
+              <span>noir.cinema.id</span>
             </a>
           </div>
         </div>
-        <span className='text-white m-3'>© 2025 Tickitz. All Rights Reserved.</span>
+        <span className='text-white m-3'>© 2025 Noir. All Rights Reserved.</span>
       </div>
     </footer>
   )
