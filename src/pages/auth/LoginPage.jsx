@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router";
+import { Link, replace, useNavigate } from "react-router";
 import { loginUserAction } from '../../redux/reducers/auth'
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
@@ -67,8 +67,8 @@ function LoginPage() {
           dispatch(loginUserAction(found))
           setLoginSuccess(true)
           setTimeout(() => {
-            navigate('/')
-          }, 1000);
+            navigate('/', { replace: true })
+          }, 3000);
         } else {
           setNotPassword(!notPassword)
         }
