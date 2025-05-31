@@ -1,21 +1,45 @@
-function Input({ id, type, name, title, inputClassName, labelClassName, placeholder, isVertical = true }) {
-  const inputProps = {
-    type,
-    id,
-    name,
-    className: inputClassName || "",
-    placeholder,
-  };
-  const labelProps = {
-    htmlFor: id,
-    className: labelClassName || "",
-  };
+import { useState } from "react";
 
+import { FiMail } from "react-icons/fi";
+import { FaLock } from "react-icons/fa";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
+
+function Input({ id, type, title, ...props }) {
+  const [eye, setEye] = useState(false)
+  const handleEye=(e)=>{
+    e.preventDefault()
+    setEye(!eye)
+  }
   return (
-    <div className={`flex ${isVertical ? 'flex-col' : 'flex-row'} gap-2`}>
-      <label {...labelProps}>{title}</label>
-      <input {...inputProps} />
-    </div>
+    <>
+      {type === 'email' &&
+        <div className={`flex flex-col gap-2`}>
+          <label htmlFor={id}>{title}</label>
+          <div className="border flex items-center p-3 rounded">
+            <FiMail className="text-xl" />
+            <input id={id} type={type} {...props} />
+          </div>
+        </div>
+      }
+      {type === 'password' &&
+        <div className={`flex flex-col gap-2`}>
+          <label htmlFor={id}>{title}</label>
+          <div className="border flex items-center p-3 rounded">
+            <FaLock className="text-xl" />
+            <input id={id} type={eye ? 'text' : type} {...props} />
+            <button onClick={(e) => handleEye(e)}>
+              {
+                eye ?
+                  <FaRegEyeSlash className="text-2xl" /> :
+                  <FaRegEye className="text-2xl" />
+              }
+            </button>
+          </div>
+        </div>
+      }
+
+    </>
   )
 }
 
