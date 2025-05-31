@@ -76,7 +76,7 @@ function LoginPage() {
         setNotEmail(!notEmail)
       }
     } else {
-      navigate('/register')
+      setNotEmail(!notEmail)
     }
   }
 
