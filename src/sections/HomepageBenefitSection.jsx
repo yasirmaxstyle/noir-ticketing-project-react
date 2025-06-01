@@ -4,11 +4,11 @@ import { TbHours24 } from "react-icons/tb";
 
 function HomepageBenefitSection() {
   return (
-    <div className="bg-jet-black flex flex-col justify-center items-center h-screen">
-      <div className="flex flex-col gap-6 max-w-[1080px] px-10">
+    <div className="bg-jet-black flex flex-col justify-center items-center py-20">
+      <div className={`flex flex-col gap-24 max-w-[1080px] px-10`} >
         <div className="flex flex-col gap-3">
           <div className="w-fit self-center">
-            <h4 className="text-ash border py-3 px-6 rounded-full">WHY CHOOSE US</h4>
+            <h4 className="text-ash py-3 px-6 rounded-full">WHY CHOOSE US</h4>
           </div>
           <h1 className="text-neutral-50 text-center">Unleashing the Ultimate Movie Experience</h1>
         </div>
