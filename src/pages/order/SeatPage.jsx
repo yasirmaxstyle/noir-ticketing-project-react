@@ -47,7 +47,7 @@ function SeatPage() {
   const SEAT_PRICE = 50000
   return (
     <section>
-      <div className="py-20 w-screen min-h-screen flex flex-col justify-center items-center bg-jet-black">
+      <div className="py-20 w-screen flex flex-col justify-center items-center bg-jet-black">
         <div className="text-white flex flex-col items-center gap-3 max-w-xl w-full mb-12">
           <div className="flex items-center gap-3 w-full">
             <div className="mx-3 size-10 rounded-full bg-ash flex justify-center items-center text-jet-black"><FaCheck /></div>
