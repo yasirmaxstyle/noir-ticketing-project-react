@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from 'react-router'
+import { Routes, Route, Outlet, useLocation } from 'react-router'
 import { useEffect, useState } from 'react'
 import { persistor, store } from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -37,11 +37,21 @@ function Layout() {
   )
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function Router() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
