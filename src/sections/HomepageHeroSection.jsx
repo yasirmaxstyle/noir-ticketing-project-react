@@ -11,10 +11,10 @@ function HomepageHeroSection({ style }) {
         </div>
         <div className="text-center">
           <h1 className="text-sunburst">
-            Experience the Magic of Cinema:
+            Embrace The Beauty of The Darkness:
           </h1>
           <h1 className="text-sunburst font-satoshi text-center font-bold">
-            Book Your Tickets Today
+            Through Darkness, We Can See The Light
           </h1>
         </div>
         <p className="text-ash">Sign up and get the ticket with a lot of discount</p>
