@@ -21,6 +21,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { FaCheck } from "react-icons/fa6";
 import { addPaymentAction, finishPaymentAction } from '../../redux/reducers/transaction';
+import { addHistoryAction } from '../../redux/reducers/historyTransactions';
 
 const useYupValidationResolver = validationSchema =>
   useCallback(
@@ -90,6 +91,10 @@ function PaymentPage() {
       status: 'paid',
       transactionId: currentOrder.transactionId
     }
+    dispatch(addHistoryAction({
+      ...currentOrder,
+      obj
+    }))
     dispatch(finishPaymentAction(obj))
     setTimeout(() => {
       navigate('result')
