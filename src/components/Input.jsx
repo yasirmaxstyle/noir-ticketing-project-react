@@ -7,12 +7,29 @@ import { FaRegEyeSlash } from "react-icons/fa";
 
 function Input({ id, type, title, ...props }) {
   const [eye, setEye] = useState(false)
-  const handleEye=(e)=>{
+  const handleEye = (e) => {
     e.preventDefault()
     setEye(!eye)
   }
   return (
     <>
+      {type === 'text' &&
+        <div className={`flex flex-col gap-2`}>
+          <label htmlFor={id}>{title}</label>
+          <div className="border flex items-center p-3 rounded">
+            <input id={id} type={type} {...props} autoComplete="off"/>
+          </div>
+        </div>
+      }
+      {type === 'tel' &&
+        <div className={`flex flex-col gap-2`}>
+          <label htmlFor={id}>{title}</label>
+          <div className="border flex items-center p-3 rounded">
+            <div className="border-r-1 pr-3">+62</div>
+            <input id={id} type={type} {...props} autoComplete="off"/>
+          </div>
+        </div>
+      }
       {type === 'email' &&
         <div className={`flex flex-col gap-2`}>
           <label htmlFor={id}>{title}</label>
