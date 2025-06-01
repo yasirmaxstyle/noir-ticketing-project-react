@@ -1,16 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-orange-500: #E95102;
   --color-sunburst: #F8C61E;
   --color-pale-gold: #D8C495;
-  --color-black-500: #0F100D;
-  --color-black-200: #878787;
-  --color-orange-50: #FDECE3;
-  --color-grey-50: #F3F3F3;
-  --color-light-grey-500: #F8F8F8;
-  --color-light-grey-300: #F3F3F3;
-  --color-neutral-500: #333333;
   --color-onyx: #222526;
   --color-graphite: #353A3E;
   --color-platinum: #E0E0E0;
@@ -19,6 +11,21 @@
   --color-cream: #F3EDE8;
   --color-light-almond: #EEE5DA;
   --color-deep-charcoal: #262424;
+  --color-resolution-blue: #021C8B;
+  --color-new-car: #1B52D7;
+  --color-lavender-gray: #C0C7D3;
+  --color-chinese-black: #13111F;
+  --color-cosmic: #0C34E9;
+  --color-midnight: #050170;
+  --color-sapphire: #0908C3;
+  --color-electric: #1586F5;
+  --color-depth: #01001C;
+  --color-royal-blue: #F6F4F0;
+  --color-marigold: #E59D2C;
+  --color-buff: #F3D58D;
+  --color-pearl: #EBDDC5;
+  --color-police-blue: #2E4365;
+  --color-citrine-brown: #8A3B08;
   --font-dm: "DM Sans", sans-serif;
   --font-satoshi: "Satoshi", sans-serif;
   --text-3xl: 1.75rem;
@@ -48,5 +55,9 @@
 
   body {
     font-family: var(--font-dm);
+  }
+
+  button:hover {
+    cursor: pointer;
   }
 }
