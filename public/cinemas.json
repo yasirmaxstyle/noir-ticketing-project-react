@@ -1,0 +1,38 @@
+{
+  "times": [
+    "09.30 AM",
+    "12.30 PM",
+    "03.00 PM",
+    "06.30 PM",
+    "09.00 PM"
+  ],
+  "location": [
+    "JAKARTA",
+    "DEPOK",
+    "BANDUNG",
+    "YOGYAKARTA",
+    "SURABAYA"
+  ],
+  "cinemas": [
+    {
+      "name": "cinepolis",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Logo_Cinepolis_2019.jpg"
+    },
+    {
+      "name": "Cinema XXI",
+      "image": "https://images.seeklogo.com/logo-png/54/1/cinema-xxi-logo-png_seeklogo-543391.png"
+    },
+    {
+      "name": "CGV Cinemas",
+      "image": "https://banner2.cleanpng.com/20181203/orv/kisspng-cj-cgv-vietnam-cinema-cj-group-film-1713914319903.webp"
+    },
+    {
+      "name": "Platinum Cineplex",
+      "image": "https://static-platinumcineplex.cinesync.io/images/theater/cinema/PlatinumCineplex.png"
+    },
+    {
+      "name": "FLIX Cinema",
+      "image": "https://upload.wikimedia.org/wikipedia/id/f/f0/Flix_Cinema_Logo.png"
+    }
+  ]
+}
