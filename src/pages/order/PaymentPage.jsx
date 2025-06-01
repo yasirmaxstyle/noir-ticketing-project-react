@@ -93,7 +93,7 @@ function PaymentPage() {
     }
     dispatch(addHistoryAction({
       ...currentOrder,
-      obj
+      status: 'paid'
     }))
     dispatch(finishPaymentAction(obj))
     setTimeout(() => {
