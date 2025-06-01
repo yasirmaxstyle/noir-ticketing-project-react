@@ -47,9 +47,9 @@ export default function Header({ className }) {
               </Link>
             </div> :
             <div className='flex gap-3'>
-              <Link to={'/'}>
+              <Link to={'/profile/account'}>
                 <span className='text-white font-bold'>
-                  DASHBOARD
+                  PROFILE
                 </span>
               </Link>
               <button onClick={handleLogout} className='flex items-center gap-1'>
