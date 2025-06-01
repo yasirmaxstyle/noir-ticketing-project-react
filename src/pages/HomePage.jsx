@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import getBackground from "../api/getBackground";
+
+import NowPlayingMoviesSection from "../sections/NowPlayingMoviesSection";
 import HomepageBenefitSection from "../sections/HomepageBenefitSection";
 import UpcomingMoviesSection from "../sections/UpcomingMoviesSection";
-import NowPlayingMoviesSection from "../sections/NowPlayingMoviesSection";
 import HomepageHeroSection from "../sections/HomepageHeroSection";
 import NewsLetterSection from "../sections/NewsLetterSection";
-
+import getBackground from "../api/getBackground";
 
 export default function HomePage() {
   const [bgImage, setBgImage] = useState('')
+  const [loading, setLoading] = useState(true)
 
   function getRandom(array) {
     const randomIndex = Math.floor(array.length * Math.random())
@@ -20,6 +21,7 @@ export default function HomePage() {
       then(data => {
         const bg = getRandom(data)
         setBgImage(bg)
+        setLoading(false)
       })
   }, [])
 
@@ -27,7 +29,10 @@ export default function HomePage() {
     <>
       <main>
         <section>
-          <HomepageHeroSection style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover' }} />
+          {loading ?
+            <HomepageHeroSection style={{ backgroundColor: '#1A1A1A' }} /> :
+            <HomepageHeroSection style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover' }} />
+          }
         </section>
         <section>
           <NowPlayingMoviesSection />
