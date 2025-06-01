@@ -15,6 +15,9 @@ import PaymentPage from './pages/order/PaymentPage'
 import ResultPage from './pages/order/ResultPage'
 import SeatPage from './pages/order/SeatPage'
 import ResetPage from './pages/auth/ResetPage'
+import Profile from './pages/profile/Profile'
+import History from './pages/profile/History'
+import LayoutProfile from './components/LayoutProfile'
 
 function Layout() {
   const [transBg, setTransBg] = useState(false);
@@ -58,6 +61,10 @@ function Router() {
               <Route index element={< PaymentPage />} />
               <Route path='result' element={< ResultPage />} />
             </Route>
+          </Route>
+          <Route path='/profile' element={<LayoutProfile />}>
+            <Route path='account' element={< Profile />} />
+            <Route path='history' element={< History />} />
           </Route>
         </Routes>
       </PersistGate>
