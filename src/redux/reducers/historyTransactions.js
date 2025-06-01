@@ -9,7 +9,10 @@ const historyTransaction = createSlice({
   initialState,
   reducers: {
     addHistoryAction: function (state, action) {
-      state.data.push(action.payload)
+      const { status, ...obj } = action.payload
+      const newHistory = structuredClone(obj)
+      newHistory.data.payment.status = status
+      state.data.push(newHistory)
       return state
     }
   }
