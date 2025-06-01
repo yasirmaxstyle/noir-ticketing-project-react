@@ -6,6 +6,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import users from './users'
 import auth from './auth'
 import transaction from './transaction'
+import historyTransaction from './historyTransactions'
 
 const usersPersist = {
   key: 'users',
@@ -33,11 +34,16 @@ const transactionPersist = {
   key: 'transaction',
   storage
 }
+const historyTransactionPersist = {
+  key: 'history',
+  storage
+}
 
 const reducer = combineReducers({
   users: persistReducer(usersPersist, users),
   auth: persistReducer(authPersist, auth),
-  transaction: persistReducer(transactionPersist, transaction)
+  transaction: persistReducer(transactionPersist, transaction),
+  historyTransaction: persistReducer(historyTransactionPersist, historyTransaction)
 })
 
 export default reducer
