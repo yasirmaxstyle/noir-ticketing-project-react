@@ -10,6 +10,8 @@ import getBackground from "../../api/getBackground"
 import { FaFacebook } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import Modal from "../../components/Modal";
+import moment from "moment/moment";
+import toast, { Toaster } from "react-hot-toast";
 
 const useYupValidationResolver = validationSchema =>
   useCallback(
@@ -73,25 +75,46 @@ function RegisterPage() {
 
   const onSubmit = (data) => {
     const { terms, passwordConfirmation, ...userData } = data
+    const currentTime = moment().format('LLL')
+    const obj = {
+      ...userData,
+      username: userData.email.split('@').slice(0, 1).join(),
+      avatar: '/src/assets/avatar.svg',
+      role: 'user',
+      createdAt: currentTime
+    }
     if (users.length > 0) {
       if (users.find(user => user.email === data.email)) {
         handleModal()
       } else {
-        dispatch(addUserAction(userData))
-        navigate('/auth/login')
+        dispatch(addUserAction(obj))
+        redirecting()
       }
     } else {
-      dispatch(addUserAction(userData))
-      navigate('/auth/login')
+      dispatch(addUserAction(obj))
+      redirecting()
     }
   }
 
   const handleModal = () => {
     setUsedEmail(!usedEmail)
   }
+
+  const redirecting = () => {
+    notify()
+    setTimeout(() => {
+      navigate('/auth/login')
+    }, 1000);
+  }
+
+  const notify = () => {
+    toast.success('Registration is successful')
+  }
+
   return (
     <section>
       <div className="w-screen h-screen flex justify-center items-center relative">
+        <Toaster />
         <div className="absolute grayscale blur-sm scale-110 w-full h-full z-[-1]" style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover' }} />
         {usedEmail &&
           <>
@@ -105,18 +128,8 @@ function RegisterPage() {
           </>
         }
         <div className="max-w-xl w-full p-12 bg-platinum rounded-xl shadow-xl grid gap-6">
-          <div className="flex items-center gap-3">
-            <div className="size-10 bg-jet-black rounded-full flex items-center justify-center text-white font-bold">
-              1
-            </div>
-            <div className="border-dashed grow border h-0" />
-            <div className="size-10 bg-gray-400 rounded-full flex items-center justify-center text-white font-bold">
-              2
-            </div>
-            <div className="border-dashed grow border h-0" />
-            <div className="size-10 bg-gray-400 rounded-full flex items-center justify-center text-white font-bold">
-              3
-            </div>
+          <div className="text-center">
+            <h2>Create Account</h2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
             <div>
@@ -181,11 +194,6 @@ function RegisterPage() {
             </Link>
           </div>
         </div>
-      </div>
-      <div>
-        <p>
-          Email has been registered. Please use another one or proceed to login."
-        </p>
       </div>
     </section>
   )
