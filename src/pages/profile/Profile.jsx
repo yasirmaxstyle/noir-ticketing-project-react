@@ -89,7 +89,7 @@ function Profile() {
                 title="First Name"
                 placeholder='First name'
                 className="px-3 w-full outline-0 rounded"
-                defaultValue={currentUser.username}
+                defaultValue={currentUser.username.split(' ').slice(0, 1).join()}
               />
               {errors.firstname && <span className="text-ash" role="alert">{errors.firstname.message}</span>}
             </div>
@@ -102,6 +102,8 @@ function Profile() {
                 title="Last Name"
                 placeholder='Last name'
                 className="px-3 w-full outline-0 rounded"
+                defaultValue={currentUser.username.split(' ').slice(1, currentUser.username.length).join(' ')}
+
               />
               {errors.lastname && <span className="text-ash" role="alert">{errors.lastname.message}</span>}
             </div>
