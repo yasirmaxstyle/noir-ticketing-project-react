@@ -76,7 +76,7 @@ function PaymentPage() {
     const obj = {
       payment: {
         name: data,
-        status: 'not-paid',
+        status: 'not paid',
         createdAt: currentTime,
         dueTime: nextFiveMinutes
       },
