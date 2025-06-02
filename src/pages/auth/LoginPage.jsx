@@ -44,8 +44,7 @@ const useYupValidationResolver = validationSchema =>
 
 const validationSchema = yup.object({
   email: yup.string().email().required('Email is required'),
-  password: yup.string().required('Password is required'),
-  terms: yup.boolean().oneOf([true], 'You have to agree to terms and conditions')
+  password: yup.string().required('Password is required')
 })
 
 function LoginPage() {
