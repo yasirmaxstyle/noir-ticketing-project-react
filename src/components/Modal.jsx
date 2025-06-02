@@ -44,22 +44,23 @@ function Modal({ message, button1, button2, link, close, loading, title, type, t
           <div>
             <h2 className="text-center">{title}</h2>
           </div>
-          <div className="grid gap-3">
-            <div className="flex justify-between items-center">
-              <span>Virtual Account</span>
-              <div className="flex items-center gap-1">
-                <span className="font-bold">12321328913829724</span>
-                <button type="button"
-                  className="border rounded px-2 py-1 hover:bg-jet-black hover:text-ash"
-                  onClick={handleCopy}>Copy</button>
+          {total &&
+            <div className="grid gap-3">
+              <div className="flex justify-between items-center">
+                <span>Virtual Account</span>
+                <div className="flex items-center gap-1">
+                  <span className="font-bold">12321328913829724</span>
+                  <button type="button"
+                    className="border rounded px-2 py-1 hover:bg-jet-black hover:text-ash"
+                    onClick={handleCopy}>Copy</button>
+                </div>
               </div>
-            </div>
-            <div className="flex justify-between">
-              <span>Total Payment</span>
-              <span className="font-bold">{total}</span>
-            </div>
-            <div></div>
-          </div>
+              <div className="flex justify-between">
+                <span>Total Payment</span>
+                <span className="font-bold">{total}</span>
+              </div>
+              <div></div>
+            </div>}
           <div>
             <p>{message}</p>
           </div>
