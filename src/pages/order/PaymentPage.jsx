@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useState } from 'react';
-import { useNavigate, useParams } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup';
 import moment from "moment/moment";
@@ -66,11 +66,12 @@ function PaymentPage() {
   const dataOrder = useSelector(state => state.transaction.data)
   const dispatch = useDispatch()
   let navigate = useNavigate()
+  const [isDue, setIsDue] = useState(false)
 
   const currentOrder = dataOrder.find(data => data.id === id)
 
-  const currentTime = moment().format('LLL')
-  const nextFiveMinutes = moment().add(5, 'minutes').format('LLL')
+  const currentTime = moment().format('MMMM Do YYYY, h:mm:ss a')
+  const nextFiveSeconds = moment().add(5, 'seconds')
 
   const onSubmit = ({ data }) => {
     const obj = {
@@ -78,7 +79,7 @@ function PaymentPage() {
         name: data,
         status: 'not paid',
         createdAt: currentTime,
-        dueTime: nextFiveMinutes
+        dueTime: nextFiveSeconds.format('MMMM Do YYYY, h:mm:ss a')
       },
       transactionId: currentOrder.transactionId
     }
@@ -87,42 +88,109 @@ function PaymentPage() {
   }
 
   const handlePayment = () => {
+    const current = moment().seconds()
+
+    let status
     const obj = {
-      status: 'paid',
+      status,
       transactionId: currentOrder.transactionId
     }
-    dispatch(addHistoryAction({
-      ...currentOrder,
-      status: 'paid'
-    }))
-    dispatch(finishPaymentAction(obj))
-    setTimeout(() => {
-      navigate('result')
-    }, 1000);
+
+    if (current > nextFiveSeconds.seconds()) {
+      status = 'not paid'
+      dispatch(addHistoryAction({
+        ...currentOrder,
+        status
+      }))
+      dispatch(finishPaymentAction(obj))
+      setDoPayment(!doPayment)
+      setIsDue(!isDue)
+    } else {
+      status = 'paid'
+      dispatch(addHistoryAction({
+        ...currentOrder,
+        status
+      }))
+      dispatch(finishPaymentAction(obj))
+      setTimeout(() => {
+        navigate('result')
+      }, 1000);
+    }
   }
 
   const notify = () => {
     toast.success('Text is copied')
   }
 
+  const handleClose = () => {
+    setDoPayment(!doPayment)
+    toast.custom((t) => (
+      <div
+        className={`${t.visible ? 'animate-enter' : 'animate-leave'
+          } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+      >
+        <div className="flex-1 w-0 p-4">
+          <div className="flex items-start">
+            <div className="ml-3 flex-1">
+              <p className="text-sm font-medium text-gray-900">
+                Your payment is saved
+              </p>
+              <p className="mt-1 text-sm text-gray-500">
+                Check history to see it!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex border-l border-gray-200">
+          <Link to='/profile/history'
+            className='w-full border border-transparent p-4 flex items-center justify-center text-sm font-medium text-jet-black hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center'
+          >
+            See history
+          </Link>
+        </div>
+        <div className="flex border-l border-gray-200">
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-jet-black hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    ))
+  }
+
   return (
     <section className='w-screen flex flex-col justify-center items-center bg-jet-black'>
       <Toaster />
       <div className='max-w-2xl my-20 w-full mx-auto text-ash flex flex-col items-center'>
+        {isDue &&
+          <>
+            <div className="fixed z-[1] inset-0 h-screen w-screen opacity-80 bg-jet-black" />
+            <Modal
+              title='Oops!!!'
+              type='payment'
+              message={`Sorry! Your time is over! But it's ok. You can book your ticket again`}
+              button1={'Close'}
+              button2={'Book again'}
+              close={() => setIsDue(!isDue)}
+              onPayment={() => navigate('/movie')} />
+          </>
+        }
         {doPayment &&
           <>
             <div className="fixed z-[1] inset-0 h-screen w-screen opacity-80 bg-jet-black" />
             <Modal
               title='Payment Info'
               type='payment'
-              message={`Pay this payment bill before it is due, on ${nextFiveMinutes}. If the bill has not been paid by the specified time, it will be forfeited.`}
+              message={`Pay this payment bill before it is due, on ${nextFiveSeconds.format('MMMM Do YYYY, h:mm:ss a')}. If the bill has not been paid by the specified time, it will be forfeited.`}
               notify={notify}
               onPayment={handlePayment}
               total={`IDR ${(currentOrder.data.seat.length * 50000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`}
               button1={'Pay Later'}
               button2={'Check Payment'}
-              close={() => setDoPayment(!doPayment)}
-              link={'result'} />
+              close={handleClose}
+            />
           </>
         }
         <div className="text-white flex flex-col items-center gap-3 max-w-xl w-full mb-12">
