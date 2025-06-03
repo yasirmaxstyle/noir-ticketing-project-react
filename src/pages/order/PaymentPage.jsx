@@ -21,7 +21,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { FaCheck } from "react-icons/fa6";
 import { addPaymentAction, finishPaymentAction } from '../../redux/reducers/transaction';
-import { addHistoryAction } from '../../redux/reducers/historyTransactions';
+import { addHistoryAction, updateHistoryAction } from '../../redux/reducers/historyTransactions';
 
 const useYupValidationResolver = validationSchema =>
   useCallback(
@@ -73,17 +73,29 @@ function PaymentPage() {
   const currentTime = moment().format('MMMM Do YYYY, h:mm:ss a')
   const nextFiveSeconds = moment().add(5, 'seconds')
 
-  const onSubmit = ({ data }) => {
+  const onSubmit = ({ payment }) => {
     const obj = {
       payment: {
-        name: data,
+        name: payment,
         status: 'not paid',
         createdAt: currentTime,
-        dueTime: nextFiveSeconds.format('MMMM Do YYYY, h:mm:ss a')
+        dueTime: nextFiveSeconds.format('MMMM Do YYYY, h:mm:ss a'),
+        expired: false
       },
       transactionId: currentOrder.transactionId
     }
     dispatch(addPaymentAction(obj))
+    let { data, ...rest } = currentOrder
+    const newHis = {
+      ...rest,
+      data: {
+        ...data,
+        payment: {
+          ...obj.payment
+        }
+      }
+    }
+    dispatch(addHistoryAction(newHis))
     setDoPayment(!doPayment)
   }
 
@@ -98,18 +110,20 @@ function PaymentPage() {
 
     if (current > nextFiveSeconds.seconds()) {
       status = 'not paid'
-      dispatch(addHistoryAction({
-        ...currentOrder,
-        status
+      dispatch(updateHistoryAction({
+        status,
+        expired: true,
+        transactionId: currentOrder.transactionId
       }))
       dispatch(finishPaymentAction(obj))
       setDoPayment(!doPayment)
       setIsDue(!isDue)
     } else {
       status = 'paid'
-      dispatch(addHistoryAction({
-        ...currentOrder,
-        status
+      dispatch(updateHistoryAction({
+        status,
+        expired: true,
+        transactionId: currentOrder.transactionId
       }))
       dispatch(finishPaymentAction(obj))
       setTimeout(() => {
@@ -170,7 +184,7 @@ function PaymentPage() {
             <Modal
               title='Oops!!!'
               type='payment'
-              message={`Sorry! Your time is over! But it's ok. You can book your ticket again`}
+              message={`Sorry! Your time is over! But it's ok. You can book your ticket again.`}
               button1={'Close'}
               button2={'Book again'}
               close={() => setIsDue(!isDue)}
