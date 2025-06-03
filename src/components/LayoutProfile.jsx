@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux'
 import { Link, Outlet, useLocation } from 'react-router'
+import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import Header from './Header'
 
 function LayoutProfile() {
@@ -7,13 +8,27 @@ function LayoutProfile() {
   const userLogin = useSelector(state => state.auth.data)
   const currentUser = userData.find(e => e.id === userLogin[0].data.id)
   const location = useLocation()
+  const [transBg, setTransBg] = useState(false);
+  const history = useSelector(state => state.historyTransaction.data)
+  const historyCurrentUser = history.filter(e => e.createdBy === userLogin[0].data.id)
+  const completedPayment = historyCurrentUser.filter(e => e.data.payment.status === 'paid')
 
-  console.log(currentUser)
-  console.log(userLogin)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", () =>
+        setTransBg(window.pageYOffset > 10)
+      );
+    }
+  }, [])
+
+  const increasePoint = 20
+  const master = 300
+  let point = completedPayment.length * increasePoint
+  let percentage = 100 / (master / (completedPayment.length * increasePoint))
 
   return (
     <>
-      <Header />
+      <Header className={`bg-${transBg && "jet-black"}`} />
       <section>
         <div className="pt-20 w-screen min-h-screen flex flex-col bg-jet-black">
           <div className="text-white flex flex-col items-center gap-3 w-full">
@@ -32,13 +47,13 @@ function LayoutProfile() {
                   <span>Loyalty Points</span>
                   <div className='h-30 text-jet-black w-full bg-ash rounded flex flex-col justify-between p-3'>
                     <span>Moviegoers</span>
-                    <span className='text-2xl'>320 points</span>
+                    <span className='text-2xl'>{point} points</span>
                   </div>
                 </div>
                 <div className='grid gap-3'>
-                  <span>180 points more to become master</span>
+                  <span>{master - point} points more to become master</span>
                   <div className='rounded-full h-5 border-ash border flex'>
-                    <div className='bg-marigold w-1/2 rounded-full' />
+                    <div className={`bg-marigold rounded-full`} style={{width: `${percentage}%`}} />
                   </div>
                 </div>
               </div>
