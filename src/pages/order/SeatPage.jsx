@@ -106,6 +106,7 @@ function SeatPage() {
                             name='seat'
                             idx={`seat-${letter}${idx + 1}`}
                             value={`${letter}${idx + 1}`}
+                            order={currentOrder}
                           />
                         ))}
                     </div>
@@ -125,6 +126,7 @@ function SeatPage() {
                             name='seat'
                             idx={`seat-${letter}${idx + 8}`}
                             value={`${letter}${idx + 8}`}
+                            order={currentOrder}
                           />
                         ))}
                     </div>
