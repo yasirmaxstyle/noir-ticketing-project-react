@@ -11,12 +11,10 @@ function Seat({ idx, order, value, ...props }) {
     ) return e
   })
 
-  let isChosen
+  const chosenSeat = []
 
-  matchSeat.forEach(element => {
-    if (element.data.seat.includes(value)) isChosen = true
-    else isChosen =false
-  });
+  matchSeat.forEach(e=> chosenSeat.push(...e.data.seat))
+  console.log(chosenSeat)
 
   return (
     <label htmlFor={idx}
@@ -26,7 +24,7 @@ function Seat({ idx, order, value, ...props }) {
         id={idx}
         className='hidden'
         value={value}
-      disabled={isChosen}
+      disabled={chosenSeat.includes(value)}
       />
     </label>
   )
