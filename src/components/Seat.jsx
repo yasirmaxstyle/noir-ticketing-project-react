@@ -14,7 +14,6 @@ function Seat({ idx, order, value, ...props }) {
   const chosenSeat = []
 
   matchSeat.forEach(e=> chosenSeat.push(...e.data.seat))
-  console.log(chosenSeat)
 
   return (
     <label htmlFor={idx}
