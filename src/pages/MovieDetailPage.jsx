@@ -10,6 +10,7 @@ import convertDate from '../utils/convertDate';
 import { addOrderAction } from "../redux/reducers/transaction";
 import moment from "moment/moment";
 import ImageWithFallback from "../components/ImageWithFallback";
+import Modal from "../components/Modal";
 
 const useYupValidationResolver = validationSchema =>
   useCallback(
@@ -58,6 +59,9 @@ function MovieDetailPage() {
   let navigate = useNavigate()
   const [cinemas, setCinemas] = useState({})
   const [submit, setSubmit] = useState(false)
+  const history = useSelector(state => state.historyTransaction.data)
+  const paidHistory = history.filter(e => e.data.payment.status === 'paid')
+  const [isFull, setIsFull] = useState(false)
 
   const { id } = useParams()
 
@@ -75,16 +79,29 @@ function MovieDetailPage() {
   }, [])
 
   const onSubmit = (data) => {
-    const userId = userLogin[0].data.id
-    const bookData = {
-      movie,
-      id,
-      data,
-      createdBy: userId
+    const matched = paidHistory.filter(e => {
+      if (e.data.time === data.time
+        && e.data.date === data.date
+        && e.data.location === data.location
+        && e.data.cinema === data.cinema
+      ) return e
+    })
+    const totalSeats = []
+    matched.forEach(e => totalSeats.push(...e.data.seat))
+    if (totalSeats.length === 98) {
+      setIsFull(true)
+    } else {
+      const userId = userLogin[0].data.id
+      const bookData = {
+        movie,
+        id,
+        data,
+        createdBy: userId
+      }
+      dispatch(addOrderAction(bookData))
+      setSubmit(true)
+      navigate(`/seat/${id}`)
     }
-    dispatch(addOrderAction(bookData))
-    setSubmit(true)
-    navigate(`/seat/${id}`)
   }
 
   return (
@@ -94,6 +111,15 @@ function MovieDetailPage() {
           <div className="absolute size-full z-[-2] grayscale" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})` }} />
           <div className="absolute size-full z-[-1] bg-linear-to-t from-jet-black from-30% to-transparent to 100%" />
           <div className='grid grid-flow-col max-w-[1080px] gap-10 mb-10'>
+            {isFull &&
+              <>
+                <div className="fixed z-[1] inset-0 h-full w-full opacity-80 bg-jet-black" />
+                <Modal
+                  message={'Sorry! This cinema is full. Please choose different time or location.'}
+                  button1={'OK'}
+                  close={() => setIsFull(!isFull)} />
+              </>
+            }
             <div className='rounded-xl max-w-sm overflow-hidden'>
               <ImageWithFallback
                 src={`https://image.tmdb.org/t/p/original/${movie['poster_path']}`}
