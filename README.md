@@ -1,26 +1,52 @@
 # NOIR: MOVIE TICKET BOOKING APP
 
-As the name suggests, this app show UI in black and white view. This project provides features for showing movie trend list, as well as feature for booking ticket in cinemas. Users also can watch his activities in dashboard, and get achievement if hit certain amount of activities.
+As the name suggests, this app show UI in black and white view. This project provides features for showing movie trend list, as well as feature for booking ticket in cinemas. Users also can watch their activities in dashboard, and get achievement if hit certain amount of purchases.
 
 ## HOW TO RUN THIS PROGRAM
+
+### Manual way
 1. Clone this project
 ```sh
-git clone https://github.com/yasirmaxstyle/fgo24-react-{project-endpoint}
+git clone https://github.com/yasirmaxstyle/noir-ticketing-project-react.git
 ```
-2. Install NPM
+2. Get into the path
+```sh
+cd noir-ticketing-project-react
+```
+3. Install NPM
 ```sh
 npm install
 ```
-3. Run in dev mode
+4. Run in dev mode
 ```sh
 npm run dev
 ```
-## TECHNOLOGIES
+5. Your app will run in http://localhost:5173, since it is built with Vite
+
+### Using Docker
+1. Clone this project
+```sh
+git clone https://github.com/yasirmaxstyle/noir-ticketing-project-react.git
+```
+2. Get into the path
+```sh
+cd noir-ticketing-project-react
+```
+3. Build image
+```bash
+docker build . -t noir:latest
+```
+4. Run image with docker
+```bash
+docker run -p 8080:80 -d noir:latest
+```
+5. Visit your app in http://localhost:8080
+
+## TECHNOLOGIES AND DEPENDENCIES
 - [React JS](https://react.dev/)
 - [Vite](https://vite.dev/)
 - [NPM](https://www.npmjs.com/)
-
-## DEPENDENCIES
+- [ReduxToolkit](https://redux-toolkit.js.org/usage/usage-guide#working-with-non-serializable-data)
 - [react-router](https://www.npmjs.com/package/react-router)
 
 ## How to take part in this project
