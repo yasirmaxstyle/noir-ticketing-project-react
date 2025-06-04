@@ -71,7 +71,7 @@ function MovieDetailPage() {
         setMovie(data)
       })
 
-    fetch('/public/cinemas.json')
+    fetch('../../public/cinemas.json')
       .then(response => response.json())
       .then(cinema => {
         setCinemas(cinema)
