@@ -1,8 +1,16 @@
 import { Link } from "react-router"
 import convertDate from "../utils/convertDate"
 import ImageWithFallback from "./ImageWithFallback"
+import { useSelector } from "react-redux"
 
 export default function MovieCards({ category, title, genres, release, src, id }) {
+  const currentUser = useSelector((state) => state.auth.data)
+  const dataOrder = useSelector(state => state.transaction.data)
+  const userId = currentUser[0].data.id
+  const userOrder = dataOrder.filter(e => {
+    if (e.createdBy === userId) return e
+  })
+
   return (
     <div className="flex grow flex-col gap-3 items-center shadow-xl rounded-xl shrink-0 basis-[calc((1*100%)-12px)] sm:basis-[calc((1/2*100%)-12px)] md:basis-[calc((1/3*100%)-12px)] lg:basis-[calc((1/4*100%)-12px)] bg-graphite group">
       <div className="w-full overflow-hidden rounded-xl relative">
@@ -14,11 +22,18 @@ export default function MovieCards({ category, title, genres, release, src, id }
                 VIEW DETAILS
               </span>
             </Link>
-            <Link to={`/seat/${id}`} className="bg-marigold px-5 py-3 rounded text-center">
-              <span className="text-white">
-                BUY TICKET
-              </span>
-            </Link>
+            {userOrder.find(e => e.id === String(id)) ?
+              <Link to={`/seat/${id}`} className="bg-marigold px-5 py-3 rounded text-center">
+                <span className="text-white">
+                  BUY TICKET
+                </span>
+              </Link> :
+              <Link to='' className="bg-marigold px-5 py-3 rounded text-center">
+                <span className="text-white">
+                  BUY TICKET
+                </span>
+              </Link>
+            }
           </div>
         </div>
         <div className="w-full h-full flex justify-center items-center text-center">
