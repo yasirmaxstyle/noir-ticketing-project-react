@@ -102,10 +102,10 @@ function History() {
               </div>
             </div>
             <div className='flex items-center justify-between px-6'>
-              <div className='flex gap-3 *:px-6 *:py-1 *:rounded'>
+              <div className='flex flex-col xs:flex-row gap-3 *:px-6 *:py-1 *:rounded'>
                 <div className='border'>ticket in active</div>
                 <div className={`${history.data.payment.status === 'paid' ?
-                  'bg-marigold text-jet-black' : 'bg-ash text-jet-black'}`}>
+                  'bg-marigold text-jet-black' : 'bg-ash text-jet-black'} text-center`}>
                   {history.data.payment.status.toUpperCase()}
                 </div>
               </div>
@@ -123,8 +123,8 @@ function History() {
                 <div>
                   <span>Ticket Information</span>
                 </div>
-                <div className='flex gap-6'>
-                  <div className='basis-30'>
+                <div className='flex flex-col sm:flex-row gap-6'>
+                  <div className='basis-30 border rounded p-3'>
                     <div style={{ height: "auto", margin: "0 auto", width: "100%" }}>
                       <QRCode
                         size={200}
@@ -164,7 +164,7 @@ function History() {
                       </div>
                     </div>
                   </div>
-                  <div className="font-bold rounded grid place-content-center">
+                  <div className="font-bold rounded grid sm:place-content-center">
                     <span>TOTAL</span>
                     <span>IDR {(history.data.seat.length * 50000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
                   </div>
@@ -176,7 +176,7 @@ function History() {
                   <span>Ticket Information</span>
                 </div>
                 <div className="grid gap-1">
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center">
                     <span className='text-ash'>Virtual Account</span>
                     <div className="flex items-center gap-3">
                       <span className="font-bold">12321328913829724</span>
