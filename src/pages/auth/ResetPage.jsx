@@ -69,7 +69,7 @@ function ResetPage() {
 
   return (
     <section>
-      <div className="w-screen h-screen flex justify-center items-center relative">
+      <div className="w-screen h-screen p-3 flex justify-center items-center relative">
         {sendEmail &&
           <>
             <div className="fixed h-full w-full opacity-80 bg-jet-black" />
