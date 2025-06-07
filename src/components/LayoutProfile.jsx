@@ -33,7 +33,7 @@ function LayoutProfile() {
         <div className="pt-20 w-screen min-h-screen flex flex-col bg-jet-black">
           <div className="text-white flex flex-col items-center gap-3 w-full">
             <div className='max-w-[1080px] w-full px-6 mx-auto flex flex-col lg:flex-row gap-6'>
-              <div className={`${location.pathname === '/profile/account' ? 'flex' : 'hidden'} bg-graphite p-12 rounded flex flex-col items-center h-fit`}>
+              <div className={`${location.pathname === '/profile/account' ? 'flex' : 'hidden'} bg-graphite p-12 lg:flex rounded flex flex-col items-center h-fit`}>
                 <div>
                   <img src={currentUser.avatar}
                     alt="profile-user"
