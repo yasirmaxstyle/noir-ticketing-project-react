@@ -1,4 +1,4 @@
-import logo from '../assets/noir-logo.svg'
+import logo from '../assets/new-noir.svg'
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -10,9 +10,9 @@ import hiflix from "../assets/sponsor/hiflix.svg"
 function Footer() {
   return (
     <footer>
-      <div className='bg-graphite flex flex-col items-center justify-center py-6 gap-6'>
-        <div className='grid grid-cols-4 max-w-[1080px] gap-6'>
-          <div className='text-white'>
+      <div className='bg-graphite flex flex-col items-center justify-center p-6 gap-6'>
+        <div className='grid md:grid-cols-4 max-w-[1080px] w-full gap-6'>
+          <div className='text-white grid gap-3'>
             <img src={logo} alt="logo tickitz" className='w-50' />
             <p>Stop waiting in line. Buy tickets conveniently, watch movies quietly.</p>
           </div>
