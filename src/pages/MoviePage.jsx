@@ -84,7 +84,7 @@ function MoviePage() {
           <img src={bgImage} alt="" className="absolute z-[-2] inset-0 -translate-y-1/4 size-full grayscale aspect-9/16 object-cover" />
           {loading ?
             <div className="absolute z-[-1] size-full bg-jet-black" /> :
-            <div className="absolute z-[-1] size-full bg-linear-to-t from-jet-black from-50% to-transparent to 100%" />
+            <div className="absolute z-[-1] min-h-[1080px] size-full bg-linear-to-t from-jet-black from-50% to-transparent to 100%" />
           }
         </div>
       </section>
@@ -92,13 +92,13 @@ function MoviePage() {
         <div className="flex justify-center">
           <div className="max-w-[1080px] w-full flex flex-col gap-6 items-center pt-50">
             <div>
-              <h1 className="text-platinum">Now Showing in Cinemas</h1>
+              <h1 className="text-platinum text-center">Now Showing in Cinemas</h1>
             </div>
             <div className="flex flex-col gap-12 text-white justify-between items-center">
               <form onSubmit={handleSearch} className="flex gap-3">
                 <div className="flex flex-col">
                   <label htmlFor="search">Find movie</label>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 p">
                     <input type="text" name="search" id="search" placeholder="Search movies" className="border border-white rounded px-5 py-3 outline-0" autoComplete="off" />
                     <button type="submit" className="p-3 rounded size-full bg-ash text-jet-black hover:cursor-pointer hover:bg-sunburst">
                       <FaSearch className="text-2xl" />
@@ -106,7 +106,7 @@ function MoviePage() {
                   </div>
                 </div>
               </form>
-              <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6">
+              <form onSubmit={handleSubmit} className="flex flex-col items-center gap-6 p-6">
                 <div className="flex flex-col justify-center items-center gap-3">
                   <div className="flex flex-wrap gap-1 justify-center">
                     {genres.map(genre =>
@@ -139,7 +139,7 @@ function MoviePage() {
       <section className="flex flex-col bg-jet-black">
         <div className="flex justify-center">
           <div className="max-w-[1080px] py-10">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="flex flex-wrap gap-3 p-6">
               {movie?.map(movie =>
                 <>
                   <MovieCards title={movie.title} genres={movie.genre} src={movie.img} id={movie.id} />
@@ -148,7 +148,7 @@ function MoviePage() {
             </div>
           </div>
         </div>
-        <div className="flex gap-3 mx-auto">
+        <div className="hidden sm:flex gap-3 mx-auto">
           {Array.from({ length: 10 }, (_, idx) =>
             <button className={`${page === idx + 1 && "!border-ash border-2 !text-jet-black"}border size-10 text-ash rounded hover:cursor-pointer hover:bg-ash hover:text-jet-black`} onClick={() => handlePage(idx + 1)}>
               <span>{idx + 1}</span>
