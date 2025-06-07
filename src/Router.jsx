@@ -1,8 +1,6 @@
-import { Routes, Route, Outlet, useLocation } from 'react-router'
+import { Routes, Route, Outlet } from 'react-router'
 import { useEffect, useState } from 'react'
-import { persistor, store } from './redux/store'
-import { PersistGate } from 'redux-persist/integration/react'
-import { Provider } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import HomePage from './pages/HomePage'
 import Footer from './components/Footer'
@@ -18,6 +16,7 @@ import ResetPage from './pages/auth/ResetPage'
 import Profile from './pages/profile/Profile'
 import History from './pages/profile/History'
 import LayoutProfile from './components/LayoutProfile'
+import PrivateRoutes from './components/PrivateRoutes'
 
 function Layout() {
   const [transBg, setTransBg] = useState(false);
@@ -37,48 +36,39 @@ function Layout() {
   )
 }
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
-
 function Router() {
+  const userLogin = useSelector((state) => state.auth.data)
+  const token = userLogin[0]?.token
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path='movie'>
-              <Route index element={<MoviePage />} />
-              <Route path=':id' element={< MovieDetailPage />} />
-            </Route>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path='movie'>
+          <Route index element={<MoviePage />} />
+          <Route path=':id' element={< MovieDetailPage />} />
+        </Route>
+      </Route>
+      <Route element={<PrivateRoutes redirectPath='/' isAllowed={!!!token} />}>
+        <Route path='/auth'>
+          <Route path='login' element={< LoginPage />} />
+          <Route path='register' element={<RegisterPage />} />
+          <Route path='reset-password' element={<ResetPage />} />
+        </Route>
+      </Route>
+      <Route element={<PrivateRoutes redirectPath='/auth/login' isAllowed={!!token} />}>
+        <Route path='/seat/:id' element={<Layout />}>
+          <Route index element={< SeatPage />} />
+          <Route path='payment'>
+            <Route index element={< PaymentPage />} />
+            <Route path='result' element={< ResultPage />} />
           </Route>
-          <Route path='/auth'>
-            <Route path='login' element={< LoginPage />} />
-            <Route path='register' element={<RegisterPage />} />
-            <Route path='reset-password' element={<ResetPage />} />
-          </Route>
-          <Route path='/seat/:id' element={<Layout />}>
-            <Route index element={< SeatPage />} />
-            <Route path='payment'>
-              <Route index element={< PaymentPage />} />
-              <Route path='result' element={< ResultPage />} />
-            </Route>
-          </Route>
-          <Route path='/profile' element={<LayoutProfile />}>
-            <Route path='account' element={< Profile />} />
-            <Route path='history' element={< History />} />
-          </Route>
-        </Routes>
-      </PersistGate>
-    </Provider>
+        </Route>
+        <Route path='/profile' element={<LayoutProfile />}>
+          <Route path='account' element={< Profile />} />
+          <Route path='history' element={< History />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 
