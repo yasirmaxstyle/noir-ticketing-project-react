@@ -42,9 +42,9 @@ function NowPlayingMoviesSection() {
       <div className={`flex flex-col p-6 gap-6 max-w-[1080px] w-full text-center`}>
         <h1 className="text-ash font-semibold">Now Showing in Cinemas</h1>
         {loading ?
-          <div className="w-full flex gap-3 h-[565px]">
+          <div className="w-full flex overflow-hidden gap-3 h-[565px]">
             {Array.from({ length: 4 }, (_, idx) =>
-              <div key={`skeleton-nowplaying-${idx}`} className="rounded-xl shrink-0 h-full basis-[calc((1/4*100%)-12px)] animate-pulse bg-platinum" />)}
+              <div key={`skeleton-nowplaying-${idx}`} className="rounded-xl shrink-0 h-full basis-[calc((1*100%)-12px)] sm:basis-[calc((1/2*100%)-12px)] md:basis-[calc((1/3*100%)-12px)] lg:basis-[calc((1/4*100%)-12px)] animate-pulse bg-platinum" />)}
           </div> :
           <div ref={cards} className="flex gap-3 overflow-hidden">
             {movie.map(movie =>

@@ -12,7 +12,7 @@ function HomepageBenefitSection() {
           </div>
           <h1 className="text-neutral-50 text-center">Unleashing the Ultimate Movie Experience</h1>
         </div>
-        <div className="flex gap-4">
+        <div className="grid md:flex gap-4">
           <div className="bg-graphite rounded-2xl p-6 flex flex-col items-center text-center gap-3">
             <PiMedal className="text-6xl text-ash" />
             <h4 className="text-ash font-bold">Guaranteed</h4>

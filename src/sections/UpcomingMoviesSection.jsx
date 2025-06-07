@@ -37,7 +37,7 @@ function UpcomingMoviesSection() {
   }, [])
 
   return (
-    <div className="flex flex-col justify-center items-center bg-jet-black h-screen">
+    <div className="flex flex-col justify-center items-center bg-jet-black">
       <div className="flex flex-col p-6 gap-6 max-w-[1080px] w-full text-center">
         <h1 className="text-ash font-semibold">Exciting Movies Coming Soon</h1>
         {loading ?
