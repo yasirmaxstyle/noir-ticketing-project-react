@@ -4,7 +4,7 @@ import ImageWithFallback from "./ImageWithFallback"
 
 export default function MovieCards({ category, title, genres, release, src, id }) {
   return (
-    <div className="flex grow flex-col gap-3 items-center shadow-xl rounded-xl shrink-0 basis-[calc((1/4*100%)-12px)] bg-graphite group">
+    <div className="flex grow flex-col gap-3 items-center shadow-xl rounded-xl shrink-0 basis-[calc((1*100%)-12px)] sm:basis-[calc((1/2*100%)-12px)] md:basis-[calc((1/3*100%)-12px)] lg:basis-[calc((1/4*100%)-12px)] bg-graphite group">
       <div className="w-full overflow-hidden rounded-xl relative">
         <div className="hidden bg-black opacity-50 absolute w-full h-full z-[1] group-hover:block" />
         <div className="hidden absolute inset-0 translate-y-1/3 group-hover:grid justify-center z-[2]">
@@ -31,7 +31,7 @@ export default function MovieCards({ category, title, genres, release, src, id }
         </div>
       </div>
       <div className="p-3 w-full flex flex-col items-center gap-3 text-center">
-        <h4 className="font-bold text-platinum">{title}</h4>
+        <span className="font-bold text-platinum text-2xl">{title}</span>
         <div className="flex gap-2 flex-wrap py-3">
           {genres?.map(genre => {
             return (
