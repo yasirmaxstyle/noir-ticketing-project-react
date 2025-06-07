@@ -17,7 +17,7 @@ function Seat({ idx, order, value, ...props }) {
 
   return (
     <label htmlFor={idx}
-      className='bg-ash has-checked:bg-sunburst size-5 rounded has-disabled:bg-gray-500'>
+      className='bg-ash has-checked:bg-sunburst size-4 sm:size-5 rounded has-disabled:bg-gray-500'>
       <input {...props}
         type="checkbox"
         id={idx}
