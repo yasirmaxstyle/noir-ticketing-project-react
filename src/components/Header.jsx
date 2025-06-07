@@ -13,6 +13,11 @@ export default function Header({ className }) {
   let navigate = useNavigate()
   const location = useLocation()
   const [menu, setMenu] = useState(false)
+  const dataOrder = useSelector(state => state.transaction.data)
+  const userId = currentUser[0].data.id
+  const userOrder = dataOrder.filter(e => {
+    if (e.createdBy === userId) return e
+  })
 
   const handleLogout = () => {
     dispatch(logoutUserAction())
@@ -36,9 +41,14 @@ export default function Header({ className }) {
             <Link to={'/movie'}>
               <span className={`text-white font-bold ${location.pathname === '/movie' && 'border-b-2 border-sunburst text-xl'}`}>MOVIE</span>
             </Link>
-            <Link to={'/order/:id'}>
-              <span className={`text-white font-bold ${location.pathname === '/movie:id' && 'border-b-2 border-sunburst text-xl'}`}>BUY TICKET</span>
-            </Link>
+            {userOrder.length > 0 ?
+              <Link to={`/seat/${userOrder[userOrder.length - 1].id}`}>
+                <span className={`text-white font-bold ${location.pathname === '/movie:id' && 'border-b-2 border-sunburst text-xl'}`}>BUY TICKET</span>
+              </Link> :
+              <Link to=''>
+                <span className={`text-white font-bold ${location.pathname === '/movie:id' && 'border-b-2 border-sunburst text-xl'}`}>BUY TICKET</span>
+              </Link>
+            }
           </div>
           {currentUser.length === 0 ?
             <div className='hidden md:flex gap-3'>
@@ -82,9 +92,14 @@ export default function Header({ className }) {
             <Link to={'/movie'}>
               <span className={`text-white font-bold`}>MOVIE</span>
             </Link>
-            <Link to={'/order/:id'}>
-              <span className={`text-white font-bold`}>BUY TICKET</span>
-            </Link>
+            {userOrder.length > 0 ?
+              <Link to={`/seat/${userOrder[userOrder.length - 1].id}`}>
+                <span className={`text-white font-bold ${location.pathname === '/movie:id' && 'border-b-2 border-sunburst text-xl'}`}>BUY TICKET</span>
+              </Link> :
+              <Link to=''>
+                <span className={`text-white font-bold ${location.pathname === '/movie:id' && 'border-b-2 border-sunburst text-xl'}`}>BUY TICKET</span>
+              </Link>
+            }
             {currentUser.length === 0 ?
               <>
                 <Link to={'/auth/login'}>
