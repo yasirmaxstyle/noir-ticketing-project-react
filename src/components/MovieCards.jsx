@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 export default function MovieCards({ category, title, genres, release, src, id }) {
   const currentUser = useSelector((state) => state.auth.data)
   const dataOrder = useSelector(state => state.transaction.data)
-  const userId = currentUser[0].data.id
+  const userId = currentUser[0]?.data.id
   const userOrder = dataOrder.filter(e => {
     if (e.createdBy === userId) return e
   })

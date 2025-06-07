@@ -14,7 +14,7 @@ export default function Header({ className }) {
   let navigate = useNavigate()
   const location = useLocation()
   const [menu, setMenu] = useState(false)
-  const userId = currentUser[0].data.id
+  const userId = currentUser[0]?.data.id
   const userOrder = dataOrder.filter(e => {
     if (e.createdBy === userId) return e
   })
