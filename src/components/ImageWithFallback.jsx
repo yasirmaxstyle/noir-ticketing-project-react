@@ -1,4 +1,4 @@
-import fallback from "../assets/fallback-image.jpg"
+import fallback from "../assets/fallback-image.svg"
 
 function ImageWithFallback({ ...props}) {
   return (
