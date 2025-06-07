@@ -9,11 +9,11 @@ import { useState } from 'react';
 
 export default function Header({ className }) {
   const currentUser = useSelector((state) => state.auth.data)
+  const dataOrder = useSelector(state => state.transaction.data)
   const dispatch = useDispatch()
   let navigate = useNavigate()
   const location = useLocation()
   const [menu, setMenu] = useState(false)
-  const dataOrder = useSelector(state => state.transaction.data)
   const userId = currentUser[0].data.id
   const userOrder = dataOrder.filter(e => {
     if (e.createdBy === userId) return e
