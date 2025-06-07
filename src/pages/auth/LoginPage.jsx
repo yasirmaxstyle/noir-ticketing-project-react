@@ -63,9 +63,9 @@ function LoginPage() {
       let found = users.find(user => user.email === data.email)
       if (found) {
         if (found.password === data.password) {
-          dispatch(loginUserAction(found))
           setLoginSuccess(true)
           setTimeout(() => {
+            dispatch(loginUserAction(found))
             navigate('/', { replace: true })
           }, 3000);
         } else {
