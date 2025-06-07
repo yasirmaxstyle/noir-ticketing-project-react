@@ -17,7 +17,7 @@ function Input({ id, type, title, ...props }) {
         <div className={`flex flex-col gap-2`}>
           <label htmlFor={id}>{title}</label>
           <div className="border flex items-center p-3 rounded">
-            <input id={id} type={type} {...props} autoComplete="off"/>
+            <input id={id} type={type} {...props} autoComplete="off" />
           </div>
         </div>
       }
@@ -26,7 +26,7 @@ function Input({ id, type, title, ...props }) {
           <label htmlFor={id}>{title}</label>
           <div className="border flex items-center p-3 rounded">
             <div className="hidden sm:block border-r-1 pr-3">+62</div>
-            <input id={id} type={type} {...props} autoComplete="off"/>
+            <input id={id} type={type} {...props} autoComplete="off" />
           </div>
         </div>
       }
@@ -48,8 +48,8 @@ function Input({ id, type, title, ...props }) {
             <button onClick={(e) => handleEye(e)}>
               {
                 eye ?
-                  <FaRegEyeSlash className="hidden sm:block text-xl" /> :
-                  <FaRegEye className="hidden sm:block text-xl" />
+                  <FaRegEyeSlash className="block text-xl" /> :
+                  <FaRegEye className="block text-xl" />
               }
             </button>
           </div>
