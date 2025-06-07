@@ -95,7 +95,7 @@ function MovieDetailPage() {
     if (totalSeats.length === 98) {
       setIsFull(true)
     } else {
-      const userId = userLogin[0].data.id
+      const userId = userLogin[0]?.data.id
       const bookData = {
         movie,
         id,
