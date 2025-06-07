@@ -27,7 +27,7 @@ function Modal({ message, button1, button2, link, close, loading, title, type, t
     notify()
   }
   return (
-    <div className={`fixed z-[2] inset-x-0 mx-auto w-md p-6 grid gap-6 bg-ash rounded ${type && 'text-jet-black translate-y-1/2'}`}>
+    <div className={`fixed z-[2] inset-x-0 mx-auto w-full max-w-md p-6 grid gap-6 bg-ash rounded ${type && 'text-jet-black translate-y-1/2'}`}>
       {loading &&
         <div className="w-full flex justify-center">
           <div
