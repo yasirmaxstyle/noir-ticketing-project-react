@@ -32,8 +32,8 @@ function LayoutProfile() {
       <section>
         <div className="pt-20 w-screen min-h-screen flex flex-col bg-jet-black">
           <div className="text-white flex flex-col items-center gap-3 w-full">
-            <div className='max-w-[1080px] w-full mx-auto flex gap-6'>
-              <div className='bg-graphite p-12 rounded flex flex-col items-center h-fit'>
+            <div className='max-w-[1080px] w-full px-6 mx-auto flex flex-col lg:flex-row gap-6'>
+              <div className={`${location.pathname === '/profile/account' ? 'flex' : 'hidden'} bg-graphite p-12 rounded flex flex-col items-center h-fit`}>
                 <div>
                   <img src={currentUser.avatar}
                     alt="profile-user"
@@ -53,12 +53,12 @@ function LayoutProfile() {
                 <div className='grid gap-3'>
                   <span>{master - point} points more to become master</span>
                   <div className='rounded-full h-5 border-ash border flex'>
-                    <div className={`bg-marigold rounded-full`} style={{width: `${percentage}%`}} />
+                    <div className={`bg-marigold rounded-full`} style={{ width: `${percentage}%` }} />
                   </div>
                 </div>
               </div>
               <div className='flex-1 grid h-fit gap-12'>
-                <div className='bg-graphite h-fit flex-1 px-12 rounded flex gap-6'>
+                <div className='bg-graphite h-fit flex-1 px-12 rounded text-center flex gap-6'>
                   <Link to='/profile/account' className={`h-full text-xl py-6 ${location.pathname === '/profile/account' && 'border-b-2 text-sunburst font-bold'}`}>
                     <span>Account Settings</span>
                   </Link>
