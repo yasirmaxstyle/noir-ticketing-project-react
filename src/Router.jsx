@@ -17,6 +17,7 @@ import Profile from './pages/profile/Profile'
 import History from './pages/profile/History'
 import LayoutProfile from './components/LayoutProfile'
 import PrivateRoutes from './components/PrivateRoutes'
+import NotFound from './components/NotFound'
 
 function Layout() {
   const [transBg, setTransBg] = useState(false);
@@ -68,6 +69,7 @@ function Router() {
           <Route path='history' element={< History />} />
         </Route>
       </Route>
+      <Route path='*' element={<NotFound />} />
     </Routes>
   )
 }
