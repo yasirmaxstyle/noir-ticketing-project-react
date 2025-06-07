@@ -24,12 +24,12 @@ function ResultPage() {
 
   return (
     <div>
-      <div className="flex flex-col h-[calc(100vh-310.967px)] w-screen justify-center items-center">
+      <div className="flex flex-col md:h-screen w-screen justify-center items-center">
         <div>
           <img src={bg} alt="" className="absolute z-[-2] inset-0 size-full grayscale aspect-9/16 object-cover" />
           <div className="absolute z-[-1] size-full inset-0 bg-linear-to-t from-jet-black from-30% to-transparent to 100%" />
         </div>
-        <div className="grid gap-6">
+        <div className="grid gap-6 px-6 py-30 bg-jet-black sm:bg-transparent">
           <div>
             <h2 className="text-white text-center">Thank you for purchasing</h2>
             <h2 className="text-white text-center">Enjoy your movie!</h2>
@@ -57,8 +57,8 @@ function ResultForDownload({ids}) {
   const { id } = useParams()
   const currentOrder = dataOrder.find(data => data.id === id)
   return (
-    <div className="flex gap-12 bg-platinum p-6 rounded print:block" id={ids}>
-      <div className="flex justify-center items-center border p-3 rounded">
+    <div className="flex flex-col items-center sm:flex-row gap-12 bg-platinum p-6 rounded print:block max-w-3xl" id={ids}>
+      <div className="flex max-w-60 justify-center items-center border p-3 rounded">
         <div style={{ height: "auto", margin: "0 auto", width: "100%" }}>
           <QRCode
             size={200}

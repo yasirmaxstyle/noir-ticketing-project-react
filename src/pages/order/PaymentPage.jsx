@@ -68,6 +68,9 @@ function PaymentPage() {
   let navigate = useNavigate()
   const [isDue, setIsDue] = useState(false)
 
+  const userData = useSelector(state => state.users.data)
+  const userLogin = useSelector(state => state.auth.data)
+  const currentUser = userData.find(e => e.id === userLogin[0].data.id)
   const currentOrder = dataOrder.find(data => data.id === id)
 
   const currentTime = moment().format('MMMM Do YYYY, h:mm:ss a')
@@ -156,7 +159,7 @@ function PaymentPage() {
           </div>
         </div>
         <div className="flex border-l border-gray-200">
-          <Link to='/profile/history'
+          <Link to='/profile/history' onClick={()=> toast.dismiss(t.id)}
             className='w-full border border-transparent p-4 flex items-center justify-center text-sm font-medium text-jet-black hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-center'
           >
             See history
@@ -177,7 +180,7 @@ function PaymentPage() {
   return (
     <section className='w-screen flex flex-col justify-center items-center bg-jet-black'>
       <Toaster />
-      <div className='max-w-2xl my-20 w-full mx-auto text-ash flex flex-col items-center'>
+      <div className='max-w-2xl my-20 w-full px-6 mx-auto text-ash flex flex-col items-center'>
         {isDue &&
           <>
             <div className="fixed z-[1] inset-0 h-screen w-screen opacity-80 bg-jet-black" />
@@ -207,7 +210,7 @@ function PaymentPage() {
             />
           </>
         }
-        <div className="text-white flex flex-col items-center gap-3 max-w-xl w-full mb-12">
+        <div className="text-white hidden md:flex flex-col items-center gap-3 max-w-xl w-full mb-12">
           <div className="flex items-center gap-3 w-full">
             <div className="mx-3 size-10 rounded-full bg-ash flex justify-center items-center text-jet-black"><FaCheck /></div>
             <div className="border border-dashed flex-1 h-0" />
@@ -223,7 +226,7 @@ function PaymentPage() {
             <span className="text-sunburst">Payment</span>
           </div>
         </div>
-        <div className='w-full bg-graphite p-12 rounded'>
+        <div className='w-full bg-graphite p-6 md:p-12 rounded'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h4 className='font-bold text-white'>Payment Info</h4>
             <div className='grid gap-3 *:grid py-6 *:**:last:text-white'>
@@ -257,6 +260,7 @@ function PaymentPage() {
                 title="Full Name"
                 placeholder="Your full name"
                 className="px-3 w-full outline-0 rounded"
+                defaultValue={currentUser.username}
               />
               <Input
                 id="email"
@@ -265,6 +269,7 @@ function PaymentPage() {
                 title="Email"
                 placeholder="Type your email"
                 className="px-3 w-full outline-0 rounded"
+                defaultValue={currentUser.email}
               />
               <Input
                 id="phone"
@@ -273,10 +278,11 @@ function PaymentPage() {
                 title="Phone Number"
                 placeholder="Type your phone number"
                 className="px-3 w-full outline-0 rounded"
+                defaultValue={currentUser.phone || ''}
               />
             </div>
-            <h4 className='font-bold'>Payment Method</h4>
-            <div className='grid grid-cols-4 gap-3 py-6'>
+            <h4 className='font-bold text-white'>Payment Method</h4>
+            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 py-6'>
               <InputHidden {...register('payment')} type='radio' name='payment' id='gpay' value='gpay'>
                 <img src={logogpay} alt="logo-gpay" />
               </InputHidden>
