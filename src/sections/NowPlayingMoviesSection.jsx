@@ -57,13 +57,13 @@ function NowPlayingMoviesSection() {
         <div className="flex justify-between px-5">
           <div className="flex gap-3">
             <button onClick={() =>
-              handleScroll(cards.current, 100, cards.current.clientWidth, -cards.current.clientWidth)}
+              handleScroll(cards.current, 50, cards.current.clientWidth, -cards.current.clientWidth)}
               disabled={arrowDisable}
               className="hover:cursor-pointer disabled:text-ash text-sunburst">
               <FaArrowLeft className="text-4xl" />
             </button>
             <button onClick={() =>
-              handleScroll(cards.current, 250, cards.current.clientWidth, cards.current.clientWidth)}
+              handleScroll(cards.current, 50, cards.current.clientWidth, cards.current.clientWidth)}
               className="hover:cursor-pointer disabled:text-ash text-sunburst">
               <FaArrowRight className="text-4xl" />
             </button>
