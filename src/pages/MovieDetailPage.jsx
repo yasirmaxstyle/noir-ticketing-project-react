@@ -82,29 +82,34 @@ function MovieDetailPage() {
   }, [])
 
   const onSubmit = (data) => {
-    if (userLogin.length === 0) { setIsLogin(!isLogin) }
-    const matched = paidHistory.filter(e => {
-      if (e.data.time === data.time
-        && e.data.date === data.date
-        && e.data.location === data.location
-        && e.data.cinema === data.cinema
-      ) return e
-    })
-    const totalSeats = []
-    matched.forEach(e => totalSeats.push(...e.data.seat))
-    if (totalSeats.length === 98) {
-      setIsFull(true)
+    if (userLogin.length === 0) {
+      setIsLogin(!isLogin)
     } else {
-      const userId = userLogin[0]?.data.id
-      const bookData = {
-        movie,
-        id,
-        data,
-        createdBy: userId
+      const matched = paidHistory.filter(e => {
+        if (e.data.time === data.time
+          && e.data.date === data.date
+          && e.data.location === data.location
+          && e.data.cinema === data.cinema
+        ) return e
+      })
+      const totalSeats = []
+      matched.forEach(e => totalSeats.push(...e.data.seat))
+      if (totalSeats.length === 98) {
+        setIsFull(true)
+      } else {
+        const userId = userLogin[0]?.data.id
+        const bookData = {
+          movie,
+          id,
+          data,
+          createdBy: userId
+        }
+        dispatch(addOrderAction(bookData))
+        setSubmit(true)
+        setTimeout(() => {
+          navigate(`/seat/${id}`)
+        }, 3000);
       }
-      dispatch(addOrderAction(bookData))
-      setSubmit(true)
-      navigate(`/seat/${id}`)
     }
   }
 
@@ -255,9 +260,18 @@ function MovieDetailPage() {
             </div>
             <div>
               <button type='submit'
-                className='bg-sunburst text-jet-black border px-6 py-3 rounded-full hover:bg-marigold'
+                className='bg-sunburst min-w-40 min-h-10 text-jet-black border px-6 py-3 rounded-full hover:bg-marigold disabled:bg-ash disabled:cursor-not-allowed'
                 disabled={submit}>
-                BOOK NOW
+                {submit ?
+                  <div
+                    className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    role="status">
+                    <span
+                      className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Redirecting...</span>
+                  </div>
+                  : <span>BOOK NOW</span>
+                }
               </button>
             </div>
             <div className="grid">
