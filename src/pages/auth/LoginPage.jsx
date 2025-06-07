@@ -57,6 +57,11 @@ function LoginPage() {
   const [loginSuccess, setLoginSuccess] = useState(false)
 
   const users = useSelector((state) => state.users.data)
+  const admin = {
+    email: 'admin@noir.com',
+    password: '123',
+    role: 'admin',
+  }
 
   const onSubmit = (data) => {
     if (users.length > 0) {
@@ -70,12 +75,41 @@ function LoginPage() {
           }, 3000);
         } else {
           setNotPassword(!notPassword)
+          return
         }
-      } else {
-        setNotEmail(!notEmail)
       }
-    } else {
+      if (data.email === admin.email) {
+        if (data.password === admin.password) {
+          setLoginSuccess(true)
+          setTimeout(() => {
+            dispatch(loginUserAction(admin))
+            navigate('/admin/dashboard', { replace: true })
+          }, 3000)
+        } else {
+          setNotPassword(!notPassword)
+          return
+        }
+      }
+      else {
+        setNotEmail(!notEmail)
+        return
+      }
+    }
+    if (data.email === admin.email) {
+      if (data.password === admin.password) {
+        setLoginSuccess(true)
+        setTimeout(() => {
+          dispatch(loginUserAction(admin))
+          navigate('/admin/dashboard', { replace: true })
+        }, 3000)
+      } else {
+        setNotPassword(!notPassword)
+        return
+      }
+    }
+    else {
       setNotEmail(!notEmail)
+      return
     }
   }
 
