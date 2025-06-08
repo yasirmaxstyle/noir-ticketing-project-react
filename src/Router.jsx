@@ -85,8 +85,10 @@ function Router() {
       <Route element={<PrivateRoutes redirectPath='/' isAllowed={!!admin} />}>
         <Route path='/admin' element={<LayoutAdmin />}>
           <Route path='dashboard' element={< Dashboard />} />
-          <Route path='movie' element={<MovieAdmin />} />
-          <Route path='add-movie' element={<AddMovie />} />
+          <Route path='movie'>
+            <Route index element={<MovieAdmin />} />
+            <Route path='add-movie' element={<AddMovie />} />
+          </Route>
         </Route>
       </Route>
       <Route path='*' element={<NotFound />} />
