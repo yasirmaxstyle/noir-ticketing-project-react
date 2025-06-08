@@ -55,7 +55,22 @@ function Input({ id, type, title, ...props }) {
           </div>
         </div>
       }
-
+      {type === 'textarea' &&
+        <div className={`flex flex-col gap-2`}>
+          <label htmlFor={id}>{title}</label>
+          <div className="border flex items-center p-3 rounded">
+            <textarea id={id} {...props} autoComplete="off" />
+          </div>
+        </div>
+      }
+      {type === 'date' &&
+        <div className={`flex flex-col gap-2`}>
+          <label htmlFor={id}>{title}</label>
+          <div className="border flex items-center p-3 rounded">
+            <input id={id} type={type} {...props} autoComplete="off" />
+          </div>
+        </div>
+      }
     </>
   )
 }
