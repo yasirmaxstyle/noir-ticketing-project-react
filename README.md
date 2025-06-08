@@ -48,6 +48,8 @@ docker run -p 8080:80 -d noir:latest
 - [NPM](https://www.npmjs.com/)
 - [ReduxToolkit](https://redux-toolkit.js.org/usage/usage-guide#working-with-non-serializable-data)
 - [react-router](https://www.npmjs.com/package/react-router)
+- [Docker](https://www.docker.com/)
+- [Nginx](https://nginx.org/)
 
 ## How to take part in this project
 You are free to fork this project, make improvement and submit a pull request to improve this project. If you find this useful or if you have suggestion, you can start discussing through my social media below.
