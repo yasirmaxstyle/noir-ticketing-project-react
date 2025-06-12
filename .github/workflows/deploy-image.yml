@@ -24,32 +24,37 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build the Docker image and tag it as "latest" and with commit SHA
+      # Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/yasirmaxstyle/noir:latest .
-          docker tag ghcr.io/yasirmaxstyle/noir:latest ghcr.io/yasirmaxstyle/noir:${{ github.sha }}
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/noir
+          docker build -t $IMAGE_NAME:latest .
+          docker tag $IMAGE_NAME:latest $IMAGE_NAME:${{ github.sha }}
 
-      # Push both tags to GHCR
+      # Push both tags
       - name: Push Docker image
         run: |
-          docker push ghcr.io/yasirmaxstyle/noir:latest
-          docker push ghcr.io/yasirmaxstyle/noir:${{ github.sha }}
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/noir
+          docker push $IMAGE_NAME:latest
+          docker push $IMAGE_NAME:${{ github.sha }}
 
-      # Stop and remove old container (if running)
-      - name: Stop old container (if any)
+      # Stop and remove old container
+      - name: Stop and remove existing container
         run: |
           docker stop noir || true
           docker rm noir || true
 
-      # Pull latest image
+      # Pull the new image
       - name: Pull latest image
-        run: docker pull ghcr.io/yasirmaxstyle/noir:latest
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/noir
+          docker pull $IMAGE_NAME:latest
 
-      # Run new container
+      # Start new container
       - name: Run container
         run: |
-          docker run -d --name noir -p 9502:9502 ghcr.io/yasirmaxstyle/noir:latest
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/noir
+          docker run -d --name noir -p 9502:9502 $IMAGE_NAME:latest
       
       # Check self-hosted server
       - name: Show runner host info
