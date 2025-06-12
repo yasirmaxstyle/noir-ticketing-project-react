@@ -50,3 +50,11 @@ jobs:
       - name: Run container
         run: |
           docker run -d --name noir -p 9502:9502 ghcr.io/yasirmaxstyle/noir:latest
+      
+      # Check self-hosted server
+      - name: Show runner host info
+        run: |
+          echo "Hostname: $(hostname)"
+          echo "Current directory: $(pwd)"
+          echo "User: $(whoami)"
+
