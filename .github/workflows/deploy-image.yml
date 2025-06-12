@@ -27,14 +27,14 @@ jobs:
       # Build the Docker image and tag it as "latest" and with commit SHA
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}:latest .
-          docker tag ghcr.io/${{ github.repository }}:latest ghcr.io/${{ github.repository }}:${{ github.sha }}
+          docker build -t ghcr.io/yasirmaxstyle/noir:latest .
+          docker tag ghcr.io/noir:latest ghcr.io/yasirmaxstyle/noir:${{ github.sha }}
 
       # Push both tags to GHCR
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository }}:latest
-          docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
+          docker push ghcr.io/yasirmaxstyle/noir:latest
+          docker push ghcr.io/yasirmaxstyle/noir:${{ github.sha }}
 
       # Stop and remove old container (if running)
       - name: Stop old container (if any)
@@ -44,9 +44,9 @@ jobs:
 
       # Pull latest image
       - name: Pull latest image
-        run: docker pull ghcr.io/${{ github.repository }}:latest
+        run: docker pull ghcr.io/yasirmaxstyle/noir:latest
 
       # Run new container
       - name: Run container
         run: |
-          docker run -d --name noir -p 80:80 ghcr.io/${{ github.repository }}:latest
+          docker run -d --name noir -p 9502:9502 ghcr.io/yasirmaxstyle/noir:latest
