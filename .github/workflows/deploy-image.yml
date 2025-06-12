@@ -28,7 +28,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ghcr.io/yasirmaxstyle/noir:latest .
-          docker tag ghcr.io/noir:latest ghcr.io/yasirmaxstyle/noir:${{ github.sha }}
+          docker tag ghcr.io/yasirmaxstyle/noir:latest ghcr.io/yasirmaxstyle/noir:${{ github.sha }}
 
       # Push both tags to GHCR
       - name: Push Docker image
