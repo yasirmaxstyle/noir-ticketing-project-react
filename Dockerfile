@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-LABEL org.opencontainers.image.source=https://github.com/yasirmaxstyle/noir
+LABEL org.opencontainers.image.source="https://github.com/yasirmaxstyle/noir-ticketing-project-react"
 
 WORKDIR /workspace
 
