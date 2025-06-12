@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-LABEL org.opencontainers.image.source https://github.com/yasirmaxstyle/noir-ticketing-project-react.git
+LABEL org.opencontainers.image.source=https://github.com/yasirmaxstyle/noir
 
 WORKDIR /workspace
 
@@ -17,4 +17,4 @@ COPY --from=0 /workspace/dist/ /usr/share/nginx/html/
 
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+EXPOSE 9502
