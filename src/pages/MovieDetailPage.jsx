@@ -11,7 +11,7 @@ import { addOrderAction } from "../redux/reducers/transaction";
 import moment from "moment/moment";
 import ImageWithFallback from "../components/ImageWithFallback";
 import Modal from "../components/Modal";
-
+import { IoIosArrowDropdown } from "react-icons/io";
 const useYupValidationResolver = validationSchema =>
   useCallback(
     async data => {
@@ -116,9 +116,10 @@ function MovieDetailPage() {
   return (
     <main>
       <section>
-        <div className="lg:h-screen w-screen relative flex flex-col items-center justify-center">
-          <div className="absolute size-full z-[-2] grayscale" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})` }} />
-          <div className="absolute size-full z-[-1] bg-linear-to-t from-jet-black from-30% to-transparent to 100%" />
+        <div className="lg:h-screen w-screen relative flex flex-col items-center justify-end">
+          <div className="absolute size-full z-[-2] grayscale" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }} />
+          {/* <div className="absolute size-full z-[-1] bg-linear-to-t from-jet-black from-30% to-transparent to 100%" /> */}
+          <div className="absolute size-full z-[-1] bg-radial-[at_50%_45%] from-transparent to-jet-black to-50%" />
           <div className='pt-30 px-6 grid lg:grid-flow-col place-items-center max-w-[1080px] gap-10 mb-10'>
             {isFull &&
               <>
@@ -144,7 +145,7 @@ function MovieDetailPage() {
               <>
                 <div className='rounded-xl max-w-sm overflow-hidden'>
                   <ImageWithFallback
-                    src={`https://image.tmdb.org/t/p/original/${movie['poster_path']}`}
+                    src={`https://image.tmdb.org/t/p/original/${movie['poster_path']}` || null}
                     alt={movie.title}
                     className='grayscale hover:grayscale-30 object-cover' />
                 </div>
@@ -251,9 +252,9 @@ function MovieDetailPage() {
               <span>Choose Cinema</span>
               <div className='flex flex-col sm:flex-row px-6 gap-3 *:flex *:gap-1'>
                 {cinemas.cinemas?.map((cinema, idx) =>
-                  <label key={`cinema-list-${idx}`} htmlFor={cinema.name} className="border-4 overflow-hidden rounded flex items-center justify-center group has-checked:border-sunburst">
+                  <label key={`cinema-list-${idx}`} htmlFor={cinema.name} className="border-2 overflow-hidden rounded flex items-center justify-center group has-checked:border-sunburst">
                     <input {...register('cinema')} type="radio" name="cinema" id={cinema.name} value={cinema.name} className="hidden" />
-                    <img src={cinema.image} alt={cinema.name} className="aspect-16/9 w-30 object-cover grayscale group-hover:grayscale-0" />
+                    <img src={cinema.image || null} alt={cinema.name} className="aspect-16/9 h-20 object-cover grayscale group-has-checked:grayscale-0 group-hover:grayscale-0" />
                   </label>
                 )}
               </div>
