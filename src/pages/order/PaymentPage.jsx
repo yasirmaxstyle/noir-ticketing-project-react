@@ -226,7 +226,7 @@ function PaymentPage() {
             <span className="text-sunburst">Payment</span>
           </div>
         </div>
-        <div className='w-full bg-graphite p-6 md:p-12 rounded'>
+        <div className='w-full p-6 md:p-12 rounded bg-radial-[at_15%_15%] from-graphite to-jet-black to-65%'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h4 className='font-bold text-white'>Payment Info</h4>
             <div className='grid gap-3 *:grid py-6 *:**:last:text-white'>

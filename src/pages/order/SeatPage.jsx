@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import Seat from "../../components/Seat"
@@ -48,7 +48,7 @@ function SeatPage() {
   return (
     <section>
       <div className="py-20 w-screen flex flex-col justify-center items-center bg-jet-black">
-        <div className="text-white hidden lg:flex flex-col items-center gap-3 max-w-xl w-full mb-12 p-3">
+        <div className="text-ash hidden lg:flex flex-col items-center gap-3 max-w-xl w-full mb-12 p-3">
           <div className="flex items-center gap-3 w-full">
             <div className="mx-3 size-10 rounded-full bg-ash flex justify-center items-center text-jet-black"><FaCheck /></div>
             <div className="border border-dashed flex-1 h-0" />
@@ -65,7 +65,7 @@ function SeatPage() {
           </div>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-6 px-3 max-w-[1080px] w-full mx-auto">
-          <div className="flex flex-col lg:max-w-[650px] items-center justify-center bg-graphite p-6 rounded">
+          <div className="flex flex-col lg:max-w-[650px] items-center justify-center p-6 rounded bg-radial-[at_0%_25%] from-graphite to-jet-black to-65%">
             <div className="flex flex-col sm:flex-row items-center px-3 py-3 border border-ash rounded gap-3 text-ash">
               <div className="grid w-70 h-full overflow-hidden rounded">
                 <img src={`https://image.tmdb.org/t/p/original/${currentOrder.movie.poster_path}`} alt={currentOrder.movie.title} className="aspect-auto xs:aspect-square sm:aspect-video object-cover grayscale hover:grayscale-25" />
@@ -91,8 +91,8 @@ function SeatPage() {
               </div>
               <div className="flex gap-3 w-fit">
                 <div className="hidden sm:grid gap-3">
-                  {Array.from(['A', 'B', 'C', 'D', 'E', 'F', 'G', ''], (letter) =>
-                    <div className="size-5 text-white flex justify-center items-center">
+                  {Array.from(['A', 'B', 'C', 'D', 'E', 'F', 'G', ''], (letter, idx) =>
+                    <div key={`letter-cols-${idx}`} className="size-5 text-white flex justify-center items-center">
                       <span>{letter}</span>
                     </div>
                   )}
@@ -100,19 +100,22 @@ function SeatPage() {
                 <div className="grid grid-cols-2 gap-6 sm:gap-12 w-fit">
                   <div className="grid gap-3">
                     <div className='grid grid-cols-7 gap-1 sm:gap-3'>
-                      {Array.from(['A', 'B', 'C', 'D', 'E', 'F', 'G'], (letter) =>
-                        Array.from({ length: 7 }, (_, idx) =>
-                          <Seat onChange={handleSeat}
-                            name='seat'
-                            idx={`seat-${letter}${idx + 1}`}
-                            value={`${letter}${idx + 1}`}
-                            order={currentOrder}
-                          />
-                        ))}
+                      {Array.from(['A', 'B', 'C', 'D', 'E', 'F', 'G'], (letter, idx) =>
+                        <React.Fragment key={`seat-left-cols-${idx}`}>
+                          {Array.from({ length: 7 }, (_, idx) =>
+                            <React.Fragment key={`seat-left-rows-${idx}`}>
+                              <Seat onChange={handleSeat}
+                                name='seat'
+                                idx={`seat-${letter}${idx + 1}`}
+                                value={`${letter}${idx + 1}`}
+                                order={currentOrder}
+                              />
+                            </React.Fragment>)}
+                        </React.Fragment>)}
                     </div>
                     <div className="grid grid-cols-7 gap-1 sm:gap-3 w-full">
                       {Array.from({ length: 7 }, (_, idx) =>
-                        <div className="size-4 sm:size-5 text-white flex justify-center items-center">
+                        <div key={`letter-left-rows-${idx}`} className="size-4 sm:size-5 text-white flex justify-center items-center">
                           <span>{idx + 1}</span>
                         </div>
                       )}
@@ -120,19 +123,22 @@ function SeatPage() {
                   </div>
                   <div className="grid gap-3">
                     <div className='grid grid-cols-7 gap-1 sm:gap-3'>
-                      {Array.from(['A', 'B', 'C', 'D', 'E', 'F', 'G'], (letter) =>
-                        Array.from({ length: 7 }, (_, idx) =>
-                          <Seat onChange={handleSeat}
-                            name='seat'
-                            idx={`seat-${letter}${idx + 8}`}
-                            value={`${letter}${idx + 8}`}
-                            order={currentOrder}
-                          />
-                        ))}
+                      {Array.from(['A', 'B', 'C', 'D', 'E', 'F', 'G'], (letter, idx) =>
+                        <React.Fragment key={`seat-right-cols-${idx}`}>
+                          {Array.from({ length: 7 }, (_, idx) =>
+                            <React.Fragment key={`seat-right-rows-${idx}`}>
+                              <Seat onChange={handleSeat}
+                                name='seat'
+                                idx={`seat-${letter}${idx + 8}`}
+                                value={`${letter}${idx + 8}`}
+                                order={currentOrder}
+                              />
+                            </React.Fragment>)}
+                        </React.Fragment>)}
                     </div>
                     <div className="grid grid-cols-7 gap-1 sm:gap-3 w-full">
                       {Array.from({ length: 7 }, (_, idx) =>
-                        <div className="size-4 sm:size-5 text-white flex justify-center items-center">
+                        <div key={`letter-right-rows-${idx}`} className="size-4 sm:size-5 text-white flex justify-center items-center">
                           <span>{idx + 8}</span>
                         </div>
                       )}
@@ -164,7 +170,7 @@ function SeatPage() {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <div className="bg-graphite py-6 rounded">
+            <div className="bg-radial-[at_15%_15%] from-graphite to-jet-black to-50% py-6 rounded">
               <h2 className="text-sunburst text-center font-bold">{currentOrder.data.cinema}</h2>
               <div className="p-6 text-ash flex flex-col gap-3 *:flex *:justify-between *:gap-3 *:**:nth-[2]:text-sunburst *:**:nth-[2]:font-bold">
                 <div>
