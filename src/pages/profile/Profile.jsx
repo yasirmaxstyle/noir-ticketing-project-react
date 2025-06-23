@@ -73,7 +73,7 @@ function Profile() {
   return (
     <section className='w-full'>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' className='grid gap-6'>
-        <div className='w-full bg-graphite grid gap-6 *:grid *:grid-cols-2 *:gap-6 p-6 lg:p-12 rounded'>
+        <div className='w-full grid gap-6 *:grid *:grid-cols-2 *:gap-6 p-6 lg:p-12 rounded bg-radial-[at_25%_25%] from-graphite to-jet-black to-65% border border-graphite'>
           <div className='border-b pb-3'>
             <span className='text-2xl'>
               Details Information
@@ -137,7 +137,7 @@ function Profile() {
             {errors.phone && <span className="text-ash" role="alert">{errors.phone.message}</span>}
           </div>
         </div>
-        <div className='w-full bg-graphite grid gap-6 *:grid *:grid-cols-2 *:gap-6 p-6 lg:p-12 rounded'>
+        <div className='w-full grid gap-6 *:grid *:grid-cols-2 *:gap-6 p-6 lg:p-12 rounded bg-radial-[at_25%_25%] from-graphite to-jet-black to-65% border border-graphite'>
           <div className='border-b pb-3'>
             <span className='text-2xl'>
               Accounts and Privacy

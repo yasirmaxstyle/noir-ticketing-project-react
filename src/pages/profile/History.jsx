@@ -91,8 +91,8 @@ function History() {
       }
       {historyCurrentUser.map((history, idx) => {
         return (
-          <div key={`history-list-${idx}`} className='bg-graphite py-6 rounded grid gap-6'>
-            <div className='flex justify-between border-b pb-3 items-center px-6'>
+          <div key={`history-list-${idx}`} className='py-6 rounded grid gap-6 bg-radial-[at_25%_25%] from-graphite to-jet-black to-65% border border-graphite'>
+            <div className='flex justify-between border-b border-graphite pb-3 items-center px-6'>
               <div className='grid gap-3'>
                 <span>{history.data.date} - {history.data.time}</span>
                 <span className='text-2xl font-bold'>{history.movie.title}</span>
@@ -103,7 +103,7 @@ function History() {
             </div>
             <div className='flex items-center justify-between px-6'>
               <div className='flex flex-col xs:flex-row gap-3 *:px-6 *:py-1 *:rounded'>
-                <div className='border'>ticket in active</div>
+                <div className='border border-graphite'>ticket in active</div>
                 <div className={`${history.data.payment.status === 'paid' ?
                   'bg-marigold text-jet-black' : 'bg-ash text-jet-black'} text-center`}>
                   {history.data.payment.status.toUpperCase()}
