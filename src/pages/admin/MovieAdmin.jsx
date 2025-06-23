@@ -3,7 +3,7 @@ import { Link } from "react-router"
 function MovieAdmin() {
   return (
     <div className='pt-20 min-h-screen w-screen flex justify-center bg-jet-black'>
-      <div className='grid gap-3 p-3 max-w-[1080px] bg-graphite w-full h-fit text-ash'>
+      <div className='grid gap-3 p-3 max-w-[1080px] w-full h-fit text-ash bg-radial-[at_25%_25%] from-graphite to-jet-black to-65% border border-graphite'>
         <div className="flex justify-between items-center">
           <h2>List Movie</h2>
           <div className="flex *:border gap-3 *:px-5 *:py-3 *:rounded">
