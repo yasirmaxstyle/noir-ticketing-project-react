@@ -30,7 +30,7 @@ export default function Header({ className }) {
   return (
     <header>
       <nav className={`flex fixed z-10 w-screen justify-center ${className}`}>
-        <div className='flex max-w-[1080px] p-2 items-center justify-between w-full px-3'>
+        <div className='flex p-3 items-center justify-between w-full md:px-12'>
           <Link to={'/'}>
             <img src={logo} alt="logo-tickitz" className='w-20' />
           </Link>

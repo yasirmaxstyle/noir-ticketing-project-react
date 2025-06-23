@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -38,8 +38,8 @@ function UpcomingMoviesSection() {
 
   return (
     <div className="flex flex-col justify-center items-center bg-jet-black">
-      <div className="flex flex-col p-6 gap-6 max-w-[1080px] w-full text-center">
-        <h1 className="text-ash font-semibold">Exciting Movies Coming Soon</h1>
+      <div className="flex flex-col p-6 gap-24 max-w-[1080px] w-full text-center">
+        <h1 className="text-ash font-semibold">Exciting Movies<br />Coming Soon</h1>
         {loading ?
           <div className="w-full flex gap-3 h-[565px]">
             {Array.from({ length: 4 }, (_, idx) =>
@@ -47,9 +47,9 @@ function UpcomingMoviesSection() {
           </div> :
           <div ref={cards} className="flex gap-3 overflow-hidden">
             {movie.map(movie =>
-              <>
+              <React.Fragment key={`upcoming-${movie.id}`}>
                 <MovieCards key={`upcoming-${movie.id}`} category="upcoming" title={movie.title} release={movie.release} src={movie.img} id={movie.id} />
-              </>
+              </React.Fragment>
             )}
           </div>
         }
