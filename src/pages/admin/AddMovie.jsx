@@ -1,10 +1,52 @@
+import { useCallback } from "react";
+import { useForm } from "react-hook-form"
 import Input from "../../components/Input"
+import * as yup from 'yup';
+
+const useYupValidationResolver = validationSchema =>
+  useCallback(
+    async data => {
+      try {
+        const values = await validationSchema.validate(data, {
+          abortEarly: false
+        });
+
+        return {
+          values,
+          errors: {}
+        };
+      } catch (errors) {
+        return {
+          values: {},
+          errors: errors.inner.reduce(
+            (allErrors, currentError) => ({
+              ...allErrors,
+              [currentError.path]: {
+                type: currentError.type ?? "validation",
+                message: currentError.message
+              }
+            }),
+            {}
+          )
+        };
+      }
+    },
+    [validationSchema]
+  );
+
+const validationSchema = yup.object({
+  title: yup.string().required('Title is required'),
+  genre: yup.array().required('Genre is required'),
+})
 
 function AddMovie() {
+  const resolver = useYupValidationResolver(validationSchema)
+  const { handleSubmit, register, formState: { errors } } = useForm({ resolver })
+
   return (
     <div className='pt-20 min-h-screen w-screen flex justify-center bg-jet-black'>
       <div className='grid gap-3 p-3 md:p-12 max-w-[1080px] w-full h-fit text-ash bg-radial-[at_25%_25%] from-graphite to-jet-black to-65% border border-graphite'>
-        <form className="p-6 grid gap-3">
+        <form className="p-6 grid gap-3" onSubmit={handleSubmit(onSubmit)}>
           <h2>Add New Movie</h2>
           <div className="grid">
             <span>Upload Image</span>
@@ -20,7 +62,9 @@ function AddMovie() {
             title="Movie Name"
             placeholder='Movie name'
             className="px-3 w-full outline-0 rounded"
+            {...register("title")}
           />
+          {errors.title && <span>{errors.title.message}</span>}
           <Input
             id="movie-genre"
             type="text"
